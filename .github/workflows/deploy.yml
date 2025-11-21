@@ -1,0 +1,17 @@
+# Define el evento que dispara el workflow.
+# Se ejecutará cada vez que se haga un push a la rama'main'.
+name: Deploy to Render
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
